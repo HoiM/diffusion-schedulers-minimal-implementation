@@ -29,7 +29,7 @@ def train():
     sigma_min = 0.01
     num_train_timesteps = 10
     batch_size = 256
-    num_epochs = 100
+    num_epochs = 750
     lr = 2e-5
     weight_decay = 0
 
@@ -90,9 +90,9 @@ def train():
 
         avg_loss = sum(loss_values) / len(loss_values)
         print("Epoch %d/%d finished. Avg Loss: %.6f" % (epoch + 1, num_epochs, avg_loss))
-        if (epoch + 1) % 2 == 0:
+        if (epoch + 1) % 10 == 0:
             torch.save(unet.state_dict(), "results/params_%02d.pth" % (epoch + 1))
-            os.system("python test.py %s %d %s" % ("results/params_%02d.pth" % (epoch + 1), seed, "results/val_%06d.png" % (epoch + 1)))
+            os.system("python test.py %s %d %s" % ("results/params_%06d.pth" % (epoch + 1), seed, "results/val_%06d.png" % (epoch + 1)))
 
 
 if __name__ == '__main__':
